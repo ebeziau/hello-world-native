@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import {
-  Platform,
   StyleSheet,
   Text,
   TouchableHighlight,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  TouchableWithoutFeedback,
   View
 } from "react-native";
 
 export default class Eva extends Component {
   _onPressButton() {
     alert("You tapped the button!");
+    //const Audic = require("audic");
+
+    //new Audic("./got_theme.mp3").play();
   }
 
   render() {
