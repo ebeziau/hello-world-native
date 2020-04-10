@@ -1,66 +1,58 @@
-import React from "react";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { createAppContainer } from "react-navigation";
-import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
-import HomeScreen from "./HomeScreenTab";
-import DetailsScreen from "./DetailsScreenTab";
-import SettingsScreen from "./SettingsScreenTab";
-import IconWithBadge from "./IconWithBadgeTab";
+import React, { Component } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
 
-const HomeIconWithBadge = props => {
-  // You should pass down the badgeCount in some other ways like context, redux, mobx or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;
-};
-
-const getTabBarIcon = (navigation, focused, tintColor) => {
-  const { routeName } = navigation.state;
-  let IconComponent = Ionicons;
-  let iconName;
-  if (routeName === "Home") {
-    iconName = `ios-information-circle${focused ? "" : "-outline"}`;
-    // We want to add badges to home tab icon
-    IconComponent = HomeIconWithBadge;
-  } else if (routeName === "Settings") {
-    // "ios-options" icon has no outlined version
-    iconName = `ios-options`;
+export default class Eva extends Component {
+  _onPressButton() {
+    alert("You tapped the button!");
   }
 
-  // You can return any component that you like here!
-  return <IconComponent name={iconName} size={25} color={tintColor} />;
-};
-
-const HomeStack = createStackNavigator({
-  Home: HomeScreen,
-  Details: DetailsScreen
-});
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-  Details: DetailsScreen
-});
-
-const TabNavigator = createBottomTabNavigator(
-  {
-    Home: HomeStack,
-    Settings: SettingsStack
-  },
-  {
-    defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) =>
-        getTabBarIcon(navigation, focused, tintColor)
-    }),
-    tabBarOptions: {
-      activeTintColor: "tomato",
-      inactiveTintColor: "gray"
-    }
-  }
-);
-
-const AppContainer = createAppContainer(TabNavigator);
-
-export default class App extends React.Component {
   render() {
-    return <AppContainer />;
+    return (
+
+      <View>
+        <View style={styles.container}>
+          <Text>Coucou</Text>
+        </View>
+
+        <View style={styles.container}>
+          <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
+            <View style={styles.button}>
+              <Text style={styles.buttonText}>Nice</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
+
+      </View>
+    );
   }
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 50
+  },
+  button: {
+    marginBottom: 30,
+    width: 260,
+    alignItems: "center",
+    backgroundColor: "#2196F3"
+  },
+  buttonText: {
+    textAlign: "center",
+    padding: 20,
+    color: "white"
+  }
+});
